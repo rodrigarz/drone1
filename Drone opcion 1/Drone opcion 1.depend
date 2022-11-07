@@ -1,0 +1,113 @@
+# depslib dependency file v1.0
+1666863416 source:e:\uni\3º\1º cuatrimestre\informática industrial\entregable 1\drone opcion 1\main.cpp
+	<iostream>
+	<ctime>
+	<thread>
+	<cmath>
+	<deque>
+	<drone.h>
+
+1666863416 e:\uni\3º\1º cuatrimestre\informática industrial\entregable 1\drone opcion 1\include\drone.h
+	<deque>
+	<ctime>
+	<thread>
+	<cmath>
+
+1666863396 source:e:\uni\3º\1º cuatrimestre\informática industrial\entregable 1\drone opcion 1\src\drone.cpp
+	"drone.h"
+	<chrono>
+	<iostream>
+
+1667812486 source:f:\uni\3º\1º cuatrimestre\informática industrial\entregable 1\drone opcion 1\src\drone.cpp
+	<ctime>
+	<deque>
+	<stdlib.h>
+	"drone.h"
+	"cola.h"
+	"msg.h"
+	<thread>
+	<cmath>
+	<chrono>
+	<iostream>
+
+1667811306 f:\uni\3º\1º cuatrimestre\informática industrial\entregable 1\drone opcion 1\include\drone.h
+
+1667810758 source:f:\uni\3º\1º cuatrimestre\informática industrial\entregable 1\drone opcion 1\main.cpp
+	<iostream>
+	<ctime>
+	<thread>
+	<cmath>
+	<deque>
+	"drone.h"
+	"cola.h"
+	"msg.h"
+	"torrecontrol.h"
+
+1667808568 f:\uni\3º\1º cuatrimestre\informática industrial\entregable 1\drone opcion 1\include\cola.h
+	<deque>
+	<ctime>
+	<thread>
+	<cmath>
+	<iostream>
+	"msg.h"
+	"drone.h"
+	"torrecontrol.h"
+
+1667157188 source:f:\uni\3º\1º cuatrimestre\informática industrial\entregable 1\drone opcion 1\src\cola.cpp
+	"cola.h"
+
+1667766234 source:f:\uni\3º\1º cuatrimestre\informática industrial\entregable 1\drone opcion 1\src\msg.cpp
+	"msg.h"
+
+1667766234 f:\uni\3º\1º cuatrimestre\informática industrial\entregable 1\drone opcion 1\include\msg.h
+	<deque>
+	<ctime>
+	<thread>
+	<cmath>
+	<iostream>
+
+1667566036 source:d:\uni\3º\1º cuatrimestre\informática industrial\entregable 1\drone opcion 1\main.cpp
+	<iostream>
+	<ctime>
+	<thread>
+	<cmath>
+	<deque>
+
+1667564900 d:\uni\3º\1º cuatrimestre\informática industrial\entregable 1\drone opcion 1\include\drone.h
+	<deque>
+	<ctime>
+	<thread>
+	<cmath>
+	<chrono>
+	<msg.h>
+	<cola.h>
+	<iostream>
+
+1667565384 d:\uni\3º\1º cuatrimestre\informática industrial\entregable 1\drone opcion 1\include\cola.h
+	<deque>
+	<ctime>
+	<thread>
+	<cmath>
+	<iostream>
+	<msg.h>
+	<drone.h>
+
+1667565012 d:\uni\3º\1º cuatrimestre\informática industrial\entregable 1\drone opcion 1\include\msg.h
+	<deque>
+	<ctime>
+	<thread>
+	<cmath>
+	<iostream>
+
+1667563874 source:d:\uni\3º\1º cuatrimestre\informática industrial\entregable 1\drone opcion 1\src\cola.cpp
+	"cola.h"
+
+1667565012 source:d:\uni\3º\1º cuatrimestre\informática industrial\entregable 1\drone opcion 1\src\msg.cpp
+	"msg.h"
+
+1667814292 f:\uni\3º\1º cuatrimestre\informática industrial\entregable 1\drone opcion 1\include\torrecontrol.h
+	"cola.h"
+	"msg.h"
+	"drone.h"
+	<deque>
+
