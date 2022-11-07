@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Drone opcion 1" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/Drone opcion 1" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="include" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/Drone opcion 1" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="include" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="../Entregable 1/Drone opcion 1/include/cola.h" />
+		<Unit filename="../Entregable 1/Drone opcion 1/include/drone.h" />
+		<Unit filename="../Entregable 1/Drone opcion 1/include/msg.h" />
+		<Unit filename="../Entregable 1/Drone opcion 1/include/torrecontrol.h" />
+		<Unit filename="../Entregable 1/Drone opcion 1/main.cpp" />
+		<Unit filename="../Entregable 1/Drone opcion 1/src/drone.cpp" />
+		<Unit filename="../Entregable 1/Drone opcion 1/src/msg.cpp" />
+		<Unit filename="../Entregable 1/Drone opcion 1/src/torrecontrol.cpp" />
+		<Extensions />
+	</Project>
+</CodeBlocks_project_file>
