@@ -11,8 +11,8 @@ class torreControl : DroneInfo
    //int tamMax = 10;
     //deque<T> mCola;
 public:
-
-    void leerMensaje(const std::deque<Msg> *miPunt);
+    torreControl();
+    void leerMensaje(colaLim<Msg> info(10));
 
 };
 
