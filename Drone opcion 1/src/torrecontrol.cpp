@@ -4,11 +4,11 @@
 #include "drone.h"
 
 Msg mensajeLeer(0.0,0.0,(time_t)0);
-colaLim<Msg> colaTemp(10);
+std::deque<Msg> colaTemp;
 
-void torreControl::leerMensaje(info)
+void torreControl::leerMensaje(std::deque<Msg> info)
 {
-    colaTemp = *miPunt;
+    colaTemp = info;
     mensajeLeer = colaTemp.get();
     cout << mensajeLeer;
 }

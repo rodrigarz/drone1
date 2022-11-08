@@ -1,18 +1,22 @@
 #ifndef TORRECONTROL_H
 #define TORRECONTROL_H
+#include <ctime>
+#include <deque>
+#include <stdlib.h>
+#include "drone.h"
 #include "cola.h"
 #include "msg.h"
-#include "drone.h"
-#include <deque>
+#include <thread>
+#include <cmath>
+#include <chrono>
+#include <iostream>
 
-
-class torreControl : DroneInfo
+class torreControl
 {
    //int tamMax = 10;
-    //deque<T> mCola;
 public:
-    torreControl();
-    void leerMensaje(colaLim<Msg> info(10));
+    torreControl(){}
+    void leerMensaje(std::deque<Msg> info);
 
 };
 
