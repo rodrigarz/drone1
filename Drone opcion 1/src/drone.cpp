@@ -22,9 +22,9 @@ void DroneInfo::arrancar()
     {
         time(&mTimeStamp);
         vec.push(Msg(mHeight, mBattery, (time_t)mTimeStamp));
-        torre.leerMensaje(vec);
         std::this_thread::sleep_for(std::chrono::milliseconds(1000)); //espera un segundo. No hace nada.
         mBattery -= 1;          //Ha pasado un segundo, tenemos 1% menos de batería
+        torre.leerMensaje(vec);
     }
 }
 
@@ -38,10 +38,8 @@ void DroneInfo::subirHasta(int altura)
         mBattery -= 1;
         time(&mTimeStamp);
         vec.push(Msg(mHeight, mBattery, (time_t)mTimeStamp));
-//        mensajeTemp = vec.get();
-torre.leerMensaje(vec);
-        cout << mensajeTemp;
         std::this_thread::sleep_for(std::chrono::milliseconds(1000)); //espera un segundo. No hace nada.
+        torre.leerMensaje(vec);
     }
 }
 
@@ -59,8 +57,6 @@ void DroneInfo::bajarHasta(int altura)
         mBattery -= 1;
         time(&mTimeStamp);
         vec.push(Msg(mHeight, mBattery,(time_t)mTimeStamp));
-        mensajeTemp = vec.get();
-        cout << mensajeTemp;
         std::this_thread::sleep_for(std::chrono::milliseconds(1000)); //espera un segundo. No hace nada.
     }
 }
@@ -109,8 +105,6 @@ double DroneInfo::obtenerDistancia(double di)
     mDistancia = di;
 
     vec.push(Msg(mHeight, mBattery, di, (time_t)mTimeStamp));
-    mensajeTemp = vec.get();
-    cout << mensajeTemp;
 
     return(di);
 }
@@ -134,8 +128,6 @@ void DroneInfo::moverHasta(const &d)
         mBattery -= 1;
         time(&mTimeStamp);
         vec.push(Msg(mHeight, mBattery, recorrido, veloc, (time_t)mTimeStamp));
-        mensajeTemp = vec.get();
-        cout << mensajeTemp;
         std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     }
 

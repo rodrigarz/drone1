@@ -41,7 +41,6 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="src/drone.cpp" />
 		<Unit filename="src/msg.cpp" />
-		<Unit filename="src/torrecontrol.cpp" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

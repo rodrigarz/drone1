@@ -18,7 +18,7 @@ class DroneInfo
     time_t mTimeStamp{0};
     double mDistancia {0};
 public:
-    friend class torreControl;
+   // friend class torreControl;
     void arrancar();
     void subirHasta(int h);     //orden de subir hasta h metros
     void bajarHasta(int h);     //orden de bajar hasta h metros
