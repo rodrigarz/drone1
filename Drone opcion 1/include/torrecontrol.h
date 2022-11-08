@@ -16,7 +16,7 @@ class torreControl
 
 public:
     torreControl(){}
-    void leerMensaje(colaLim<Msg> info)
+    void leerMensaje(colaLim<Msg>& info)
     {
     Msg mensajeLeer(0.0,0.0,(time_t)0);
     mensajeLeer = info.get();

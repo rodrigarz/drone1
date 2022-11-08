@@ -140,7 +140,7 @@
 	<cmath>
 	<iostream>
 
-1667932280 f:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\include\torrecontrol.h
+1667938048 f:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\include\torrecontrol.h
 	<ctime>
 	<deque>
 	<stdlib.h>
@@ -161,7 +161,7 @@
 	"cola.h"
 	"drone.h"
 
-1667931204 source:f:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\src\drone.cpp
+1667938064 source:f:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\src\drone.cpp
 	<ctime>
 	<deque>
 	<stdlib.h>
