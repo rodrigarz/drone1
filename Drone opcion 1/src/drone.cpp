@@ -12,9 +12,7 @@
 
 
 
-using namespace std;
 colaLim<Msg> vec(10);
-Msg mensajeTemp(0.0,0.0,(time_t)0);
 torreControl torre;
 
 
@@ -24,7 +22,6 @@ void DroneInfo::arrancar()
     {
         time(&mTimeStamp);
         vec.push(Msg(mHeight, mBattery, (time_t)mTimeStamp));
-        mensajeTemp = vec.get();
         torre.leerMensaje(vec);
         std::this_thread::sleep_for(std::chrono::milliseconds(1000)); //espera un segundo. No hace nada.
         mBattery -= 1;          //Ha pasado un segundo, tenemos 1% menos de batería
@@ -41,7 +38,8 @@ void DroneInfo::subirHasta(int altura)
         mBattery -= 1;
         time(&mTimeStamp);
         vec.push(Msg(mHeight, mBattery, (time_t)mTimeStamp));
-        mensajeTemp = vec.get();
+//        mensajeTemp = vec.get();
+torre.leerMensaje(vec);
         cout << mensajeTemp;
         std::this_thread::sleep_for(std::chrono::milliseconds(1000)); //espera un segundo. No hace nada.
     }

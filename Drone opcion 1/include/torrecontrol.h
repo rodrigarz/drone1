@@ -13,10 +13,10 @@
 
 class torreControl
 {
-   //int tamMax = 10;
+
 public:
     torreControl(){}
-    void leerMensaje(std::deque<Msg> info);
+    void leerMensaje(colaLim<Msg> info);
 
 };
 

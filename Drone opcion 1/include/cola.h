@@ -7,10 +7,8 @@
 #include <iostream>
 #include "msg.h"
 #include "drone.h"
-#include "torrecontrol.h"
 
 
-using namespace std;
 
 const int colaVacia = -1;
 

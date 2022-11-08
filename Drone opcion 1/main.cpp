@@ -16,7 +16,7 @@
 int main()
 {
     DroneInfo miDron;
-    std::deque<DroneInfo> bufferTorreControl;
+
 
     miDron.arrancar();
     miDron.subirHasta(10);
