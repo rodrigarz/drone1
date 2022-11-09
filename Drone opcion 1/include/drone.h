@@ -20,8 +20,8 @@ class DroneInfo
 public:
    // friend class torreControl;
     void arrancar();
-    void subirHasta(int h);     //orden de subir hasta h metros
-    void bajarHasta(int h);     //orden de bajar hasta h metros
+    void subirHasta(double h);     //orden de subir hasta h metros
+    void bajarHasta(double h);     //orden de bajar hasta h metros
     void aterrizar();
     double obtenerDistancia(double di);
     void moverHasta(const &d);

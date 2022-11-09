@@ -28,37 +28,63 @@ void DroneInfo::arrancar()
     }
 }
 
-void DroneInfo::subirHasta(int altura)
+void DroneInfo::subirHasta(double altura)
 {
-    std::cout << "Ascendiendo a "<< altura << " metros..."<< std::endl;
-    std::cout << "\n" << std::endl;
-    while(mHeight<altura)
+    if(altura < 0)
     {
-        mHeight += 1;
-        mBattery -= 1;
-        time(&mTimeStamp);
-        vec.push(Msg(mHeight, mBattery, (time_t)mTimeStamp));
-        std::this_thread::sleep_for(std::chrono::milliseconds(1000)); //espera un segundo. No hace nada.
-        torre.leerMensaje(vec);
+        cout << "ERROR, no se puede ascender a una  altura negativa" <<endl;
+        return;
+    }
+    else if (altura < mHeight)
+    {
+        cout << "ERROR, no se puede ascendere hacia abajo" <<endl;
+        return;
+    }
+    else
+    {
+        std::cout << "Ascendiendo a "<< altura << " metros..."<< std::endl;
+        std::cout << "\n" << std::endl;
+        while(mHeight<altura)
+        {
+            mHeight += 1;
+            mBattery -= 1;
+            time(&mTimeStamp);
+            vec.push(Msg(mHeight, mBattery, (time_t)mTimeStamp));
+            std::this_thread::sleep_for(std::chrono::milliseconds(1000)); //espera un segundo. No hace nada.
+            torre.leerMensaje(vec);
+        }
     }
 }
 
-void DroneInfo::bajarHasta(int altura)
+void DroneInfo::bajarHasta(double altura)
 {
-    if(altura)
+    if(altura < 0)
     {
-        //para no imprimir "descendiento a 0 metros..." (aterrizaje)
-        std::cout << "Descendiendo a "<< altura << " metros..."<< std::endl;
-        std::cout << "\n" << std::endl;
+        cout << "ERROR, la altura no puede ser negativa" <<endl;
+        return;
     }
-    while(mHeight>altura)
+    else if(altura > mHeight)
     {
-        mHeight -= 1;
-        mBattery -= 1;
-        time(&mTimeStamp);
-        vec.push(Msg(mHeight, mBattery,(time_t)mTimeStamp));
-        torre.leerMensaje(vec);
-        std::this_thread::sleep_for(std::chrono::milliseconds(1000)); //espera un segundo. No hace nada.
+        cout << "ERROR, no puedes bajar hacia arriba" <<endl;
+        return;
+    }
+    else
+    {
+        if(altura)
+            {
+            //para no imprimir "descendiento a 0 metros..." (aterrizaje)
+            std::cout << "Descendiendo a "<< altura << " metros..."<< std::endl;
+            std::cout << "\n" << std::endl;
+            }
+        while(mHeight>altura)
+        {
+            mHeight -= 1;
+            mBattery -= 1;
+            time(&mTimeStamp);
+            vec.push(Msg(mHeight, mBattery,(time_t)mTimeStamp));
+            torre.leerMensaje(vec);
+            std::this_thread::sleep_for(std::chrono::milliseconds(1000)); //espera un segundo. No hace nada.
+        }
     }
 }
 
@@ -112,25 +138,34 @@ double DroneInfo::obtenerDistancia(double di)
 
 void DroneInfo::moverHasta(const &d)
 {
+    if (mHeight <= 2)
+    {
+        cout << "ATENCION: La altura es demasiado baja para mover el drone, suba hasta una altura mayor" <<endl;
+        return;
+    }
+    else
+    {
     double recorrido = 0;
     int veloc = 0;
     srand(time(NULL));
     while(d >= recorrido)
-    {
-        if (mBattery <= mHeight)
         {
-            std::cout << "La batería se esta agotando, aterrizando automaticamente" << std::endl;
-            aterrizar();
-            std::cout << "Batería agotada " <<endl;
-            break;
+            if (mBattery <= mHeight)
+            {
+                std::cout << "La batería se esta agotando, aterrizando automaticamente" << std::endl;
+                aterrizar();
+                std::cout << "Batería agotada " <<endl;
+                break;
+            }
+            veloc = 15+rand()%(26-15);
+            recorrido = recorrido +veloc;
+            mBattery -= 1;
+            time(&mTimeStamp);
+            vec.push(Msg(mHeight, mBattery, recorrido, veloc, (time_t)mTimeStamp));
+            torre.leerMensaje(vec);
+            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+
         }
-        veloc = 15+rand()%(26-15);
-        recorrido = recorrido +veloc;
-        mBattery -= 1;
-        time(&mTimeStamp);
-        vec.push(Msg(mHeight, mBattery, recorrido, veloc, (time_t)mTimeStamp));
-        torre.leerMensaje(vec);
-        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     }
 
 }

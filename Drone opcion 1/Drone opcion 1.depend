@@ -111,7 +111,7 @@
 	"drone.h"
 	<deque>
 
-1667929216 source:f:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\main.cpp
+1668005820 source:f:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\main.cpp
 	<iostream>
 	<ctime>
 	<thread>
@@ -122,7 +122,7 @@
 	"msg.h"
 	"torrecontrol.h"
 
-1667931664 f:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\include\drone.h
+1668004628 f:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\include\drone.h
 
 1667930432 f:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\include\cola.h
 	<deque>
@@ -161,7 +161,7 @@
 	"cola.h"
 	"drone.h"
 
-1667938064 source:f:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\src\drone.cpp
+1668005132 source:f:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\src\drone.cpp
 	<ctime>
 	<deque>
 	<stdlib.h>
