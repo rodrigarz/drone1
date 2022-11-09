@@ -37,6 +37,7 @@
 		<Unit filename="include/cola.h" />
 		<Unit filename="include/drone.h" />
 		<Unit filename="include/msg.h" />
+		<Unit filename="include/randomgenerator.h" />
 		<Unit filename="include/torrecontrol.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/drone.cpp" />

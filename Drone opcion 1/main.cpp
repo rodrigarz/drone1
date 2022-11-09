@@ -8,6 +8,7 @@
 #include <thread>
 #include <cmath>
 #include <deque>
+#include <chrono>
 #include "drone.h"
 #include "cola.h"
 #include "msg.h"
@@ -29,7 +30,12 @@ int main()
         cout << "D: Desplazarse desde las coordenadas indicadas hasta las coordenadas indicadas" <<endl;
         cout << "B: Bajar hasta la altura indicada" << endl << "Q: Aterrizar y desconectar (si el drone no esta activo, salir del programa)" <<endl;
         cout << "-------------------------------------------------------------------------------" << endl;
+
+        double t0 = clock();
         cin >> opcion;
+        double t1 = clock();
+        double tiempo_ejecc = ((t1-t0)/CLOCKS_PER_SEC);
+
         switch(opcion)
         {
             case 'A':
@@ -50,7 +56,7 @@ int main()
                     estado = 2;
                     cout << "Introduzca la altura deseada: ";
                     cin >> alt;
-                    miDron.subirHasta(alt);
+                    miDron.subirHasta(alt, tiempo_ejecc);
                     break;
                 }
                 else
@@ -62,7 +68,7 @@ int main()
                 if(estado != 0)
                 {
                     estado = 3;
-                    miDron.moverHasta(miDron.obtenerDistancia(0));
+                    miDron.moverHasta(miDron.obtenerDistancia(0), tiempo_ejecc);
                     break;
                 }
                 else
@@ -76,7 +82,7 @@ int main()
                     estado = 4;
                     cout << "Introduzca la altura deseada: ";
                     cin >> alt;
-                    miDron.bajarHasta(alt);
+                    miDron.bajarHasta(alt, tiempo_ejecc);
                     break;
                 }
                 else
@@ -89,7 +95,7 @@ int main()
                 if(estado != 0)
                 {
                     estado = 5;
-                    miDron.aterrizar();
+                    miDron.aterrizar(tiempo_ejecc);
                     break;
                 }
                 else
