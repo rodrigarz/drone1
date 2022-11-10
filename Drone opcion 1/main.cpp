@@ -13,6 +13,9 @@
 #include "cola.h"
 #include "msg.h"
 #include "torrecontrol.h"
+#include <fstream>
+
+using namespace std;
 
 int main()
 {
@@ -21,6 +24,9 @@ int main()
     char opcion;
     double alt = 0;
     int estado = 0; // 1 para arrancado, 2 para en altura, 3 para desplazando, 4 para bajando, 5 para aterrizar y apagar
+
+
+
     do
     {
         cout << endl;

@@ -111,7 +111,7 @@
 	"drone.h"
 	<deque>
 
-1668025868 source:f:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\main.cpp
+1668112876 source:f:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\main.cpp
 	<iostream>
 	<ctime>
 	<thread>
@@ -122,8 +122,10 @@
 	"cola.h"
 	"msg.h"
 	"torrecontrol.h"
+	<fstream>
 
-1668025870 f:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\include\drone.h
+1668112876 f:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\include\drone.h
+	<fstream>
 
 1667930432 f:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\include\cola.h
 	<deque>
@@ -134,12 +136,13 @@
 	"msg.h"
 	"drone.h"
 
-1667766234 f:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\include\msg.h
+1668111734 f:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\include\msg.h
 	<deque>
 	<ctime>
 	<thread>
 	<cmath>
 	<iostream>
+	<fstream>
 
 1667938048 f:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\include\torrecontrol.h
 	<ctime>
@@ -153,7 +156,7 @@
 	<chrono>
 	<iostream>
 
-1667766234 source:f:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\src\msg.cpp
+1668111734 source:f:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\src\msg.cpp
 	"msg.h"
 
 1667932272 source:f:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\src\torrecontrol.cpp
@@ -162,7 +165,7 @@
 	"cola.h"
 	"drone.h"
 
-1668026614 source:f:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\src\drone.cpp
+1668113154 source:f:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\src\drone.cpp
 	<ctime>
 	<deque>
 	<stdlib.h>

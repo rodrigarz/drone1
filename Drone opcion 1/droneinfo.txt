@@ -1,0 +1,8 @@
+Se arrancó el drone en el instante 0
+Se ordenó al drone subir hasta la altura 10 en el instante 2.313
+Se ordeno al drone desplazarse hasta las coordenadas 0.1º, 0.1º desde las coordenadas 0º, 0º en el instante 2.312
+Se ordenó al drone aterrizar en el instante 0
+Se ordeno al drone bajar hasta la altura 0 en el instante 0
+Se ordenó al drone subir hasta la altura 1 en el instante 15.014
+Se ordenó al drone aterrizar en el instante 0
+Se ordeno al drone bajar hasta la altura 0 en el instante 0

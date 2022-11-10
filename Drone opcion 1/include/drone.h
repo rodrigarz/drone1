@@ -1,6 +1,6 @@
 #ifndef DRONE_H
 #define DRONE_H
-
+#include <fstream>
 
 
 const int TIEMPO_ARRANQUE = 2;  //tiempo en segundos que emplea en arranque

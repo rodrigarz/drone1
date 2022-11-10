@@ -25,9 +25,19 @@ RandReal VelBajada(1,2.5);
 RandReal BatEspera(-1, 1);
 CoordenadasGPS actuales, destino;
 
+std::ofstream miFichero ("droneinfo.txt");
 
 void DroneInfo::arrancar()
 {
+    if(!miFichero)
+    {
+        cout << "Error al abrir el fichero" << endl;
+        exit (1);
+    }
+
+
+    time_t inicial = mTimeStamp;
+    miFichero << "Se arrancó el drone en el instante " << inicial <<endl;
     do
     {
     std::cout << "Introduzca las coordenadas de actuales, latitud (intervalo +-90) y longuitud (intervalo +-180), en grados: " << std::endl;
@@ -45,12 +55,24 @@ void DroneInfo::arrancar()
         torre.leerMensaje(vec);
         std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     }
+
+
 }
 
 
 void DroneInfo::subirHasta(double altura, double &t)
 {
+
+    if(!miFichero)
+    {
+        cout << "Error al abrir el fichero" << endl;
+        exit (1);
+    }
+
+
     mBattery -= t + BatEspera();
+
+    miFichero << "Se ordenó al drone subir hasta la altura " << altura << " en el instante " << t << endl;
 
     if(altura < 0)
     {
@@ -84,6 +106,15 @@ void DroneInfo::subirHasta(double altura, double &t)
 
 void DroneInfo::bajarHasta(double altura, double &t)
 {
+
+    if(!miFichero)
+    {
+        cout << "Error al abrir el fichero" << endl;
+        exit (1);
+    }
+
+    miFichero << "Se ordeno al drone bajar hasta la altura "<< altura << " en el instante " << t << endl;
+
     mBattery -= t + BatEspera();
 
     if(altura < 0)
@@ -122,6 +153,22 @@ void DroneInfo::bajarHasta(double altura, double &t)
 
 void DroneInfo::aterrizar(double &t)
 {
+
+    if(!miFichero)
+    {
+        cout << "Error al abrir el fichero" << endl;
+        exit (1);
+    }
+
+    if (t = 0)
+    {
+        miFichero << "Se ordenó al drone aterrizar automaticamente porque la batería se estaba agotando " <<endl;
+    }else
+    {
+        miFichero << "Se ordenó al drone aterrizar en el instante " << t <<endl;
+    }
+
+
     mBattery -= t + BatEspera();
 
     double aux = 0;
@@ -183,6 +230,14 @@ double DroneInfo::obtenerDistancia(double di)
 
 void DroneInfo::moverHasta(const &d, double &t)
 {
+
+    if(!miFichero)
+    {
+        cout << "Error al abrir el fichero" << endl;
+        exit (1);
+    }
+
+    miFichero << "Se ordeno al drone desplazarse hasta las coordenadas " << destino.latitud << "º, " << destino.longuitud << "º desde las coordenadas " << actuales.latitud << "º, " << actuales.longuitud << "º en el instante " << t <<endl;
 
     mBattery -= t + BatEspera();
 
