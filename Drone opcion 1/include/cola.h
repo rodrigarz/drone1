@@ -18,9 +18,10 @@ class colaLim : public std::deque<T> //Cola de longuitud limitada
     int tamMax = 10;
     deque<T> mCola;
 public:
-    colaLim (int nuevoTam):tamMax(10) {} //Es igual que poner que el nuevo_tam es igual a tam_max, con el cuerpo del constructor vacio
+    colaLim (int nuevoTam){} //Es igual que poner que el nuevo_tam es igual a tam_max, con el cuerpo del constructor vacio
     void push(Msg dato); //Introducir valor en la cola, recive valor
     T get(); //obtener valor de la cola, es un valor, no recive valor
+    void registro(Msg info, int a);
     int size()
     {
         return mCola.size();
@@ -54,5 +55,10 @@ T colaLim<T>::get()
 
     return dato;
 
+}
+template <typename T>
+void colaLim<T>::registro(Msg info, int a)
+{
+    mCola.push_front(info);
 }
 #endif // COLA_H

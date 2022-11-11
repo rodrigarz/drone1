@@ -184,3 +184,69 @@
 	<ctime>
 	<random>
 
+1668170556 source:d:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\main.cpp
+	<iostream>
+	<ctime>
+	<thread>
+	<cmath>
+	<deque>
+	<chrono>
+	"drone.h"
+	"cola.h"
+	"msg.h"
+	"torrecontrol.h"
+	<fstream>
+
+1668170710 d:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\include\drone.h
+
+1668169514 d:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\include\cola.h
+	<deque>
+	<ctime>
+	<thread>
+	<cmath>
+	<iostream>
+	"msg.h"
+	"drone.h"
+
+1668111734 d:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\include\msg.h
+	<deque>
+	<ctime>
+	<thread>
+	<cmath>
+	<iostream>
+	<fstream>
+
+1667938048 d:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\include\torrecontrol.h
+	<ctime>
+	<deque>
+	<stdlib.h>
+	"drone.h"
+	"cola.h"
+	"msg.h"
+	<thread>
+	<cmath>
+	<chrono>
+	<iostream>
+
+1668170974 source:d:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\src\drone.cpp
+	<ctime>
+	<deque>
+	<stdlib.h>
+	"drone.h"
+	"cola.h"
+	"msg.h"
+	"torrecontrol.h"
+	<thread>
+	<cmath>
+	<chrono>
+	<iostream>
+	"randomgenerator.h"
+
+1668023772 d:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\include\randomgenerator.h
+	<iostream>
+	<ctime>
+	<random>
+
+1668111734 source:d:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\src\msg.cpp
+	"msg.h"
+

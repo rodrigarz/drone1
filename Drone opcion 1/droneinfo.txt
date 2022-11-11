@@ -1,8 +1,58 @@
 Se arrancó el drone en el instante 0
-Se ordenó al drone subir hasta la altura 10 en el instante 2.313
-Se ordeno al drone desplazarse hasta las coordenadas 0.1º, 0.1º desde las coordenadas 0º, 0º en el instante 2.312
-Se ordenó al drone aterrizar en el instante 0
-Se ordeno al drone bajar hasta la altura 0 en el instante 0
-Se ordenó al drone subir hasta la altura 1 en el instante 15.014
-Se ordenó al drone aterrizar en el instante 0
-Se ordeno al drone bajar hasta la altura 0 en el instante 0
+Se ordenó al drone subir hasta la altura 10 en el instante 7558
+Se ordeno al drone desplazarse hasta las coordenadas 0.001º, 0º desde las coordenadas 0º, 0º en el instante 22759
+Se ordeno al drone bajar hasta la altura 5 en el instante 32062
+Se ordenó al drone aterrizar en el instante 39254
+Se ordeno al drone bajar hasta la altura 0 en el instante 39256
+
+Registro de la actividad: 
+Altura: 0  Bateria:  99.8354  Velocidad instantanea: 0   Distancia recorrida: 0  Time Stamp:  1668170977
+
+Altura: 0  Bateria:  99.5394  Velocidad instantanea: 0   Distancia recorrida: 0  Time Stamp:  1668170978
+
+Altura: 0.746887  Bateria:  98.8224  Velocidad instantanea: 0   Distancia recorrida: 0  Time Stamp:  1668170981
+
+Altura: 1.69084  Bateria:  97.8784  Velocidad instantanea: 0   Distancia recorrida: 0  Time Stamp:  1668170982
+
+Altura: 2.37561  Bateria:  97.1937  Velocidad instantanea: 0   Distancia recorrida: 0  Time Stamp:  1668170983
+
+Altura: 4.30429  Bateria:  95.265  Velocidad instantanea: 0   Distancia recorrida: 0  Time Stamp:  1668170984
+
+Altura: 5.72303  Bateria:  93.8462  Velocidad instantanea: 0   Distancia recorrida: 0  Time Stamp:  1668170985
+
+Altura: 6.67925  Bateria:  92.89  Velocidad instantanea: 0   Distancia recorrida: 0  Time Stamp:  1668170986
+
+Altura: 7.617  Bateria:  91.9523  Velocidad instantanea: 0   Distancia recorrida: 0  Time Stamp:  1668170987
+
+Altura: 8.78286  Bateria:  90.7864  Velocidad instantanea: 0   Distancia recorrida: 0  Time Stamp:  1668170988
+
+Altura: 10.4677  Bateria:  89.1016  Velocidad instantanea: 0   Distancia recorrida: 0  Time Stamp:  1668170989
+
+Altura: 10.4677  Bateria:  85.1016  Velocidad instantanea: 0   Distancia recorrida: 0  Time Stamp:  1668170989
+
+Altura: 10.1323  Bateria:  82.0001  Velocidad instantanea: 23   Distancia recorrida: 23  Time Stamp:  1668170997
+
+Altura: 10.2636  Bateria:  80.7576  Velocidad instantanea: 24   Distancia recorrida: 47  Time Stamp:  1668170998
+
+Altura: 10.0909  Bateria:  79.2747  Velocidad instantanea: 24   Distancia recorrida: 71  Time Stamp:  1668170999
+
+Altura: 10.9201  Bateria:  78.5729  Velocidad instantanea: 16   Distancia recorrida: 87  Time Stamp:  1668171000
+
+Altura: 10.5802  Bateria:  77.6901  Velocidad instantanea: 22   Distancia recorrida: 109  Time Stamp:  1668171001
+
+Altura: 10.2718  Bateria:  75.8487  Velocidad instantanea: 20   Distancia recorrida: 129  Time Stamp:  1668171002
+
+Altura: 9.22079  Bateria:  73.3618  Velocidad instantanea: 0   Distancia recorrida: 0  Time Stamp:  1668171006
+
+Altura: 7.77684  Bateria:  72.7686  Velocidad instantanea: 0   Distancia recorrida: 0  Time Stamp:  1668171007
+
+Altura: 6.59207  Bateria:  71.2134  Velocidad instantanea: 0   Distancia recorrida: 0  Time Stamp:  1668171008
+
+Altura: 4.16339  Bateria:  70.5733  Velocidad instantanea: 0   Distancia recorrida: 0  Time Stamp:  1668171009
+
+Altura: 2.24465  Bateria:  65.519  Velocidad instantanea: 0   Distancia recorrida: 0  Time Stamp:  1668171013
+
+Altura: 0.788431  Bateria:  63.5823  Velocidad instantanea: 0   Distancia recorrida: 0  Time Stamp:  1668171014
+
+Altura: -0.649316  Bateria:  63.0618  Velocidad instantanea: 0   Distancia recorrida: 0  Time Stamp:  1668171015
+

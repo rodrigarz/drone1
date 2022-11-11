@@ -20,6 +20,7 @@ using namespace std;
 int main()
 {
     DroneInfo miDron;
+    torreControl torre;
 
     char opcion;
     double alt = 0;
@@ -30,12 +31,13 @@ int main()
     do
     {
         cout << endl;
-        cout << "-------------------------------------------------------------------------------" <<endl;
+        cout << "----------------------------------------------------------------------------------------------------" <<endl;
         cout << "Indique la accion que ejecutara el drone." << endl;
         cout << "A: arrancar el drone" <<endl << "S: Subir hasta la altura indicada" << endl;
         cout << "D: Desplazarse desde las coordenadas indicadas hasta las coordenadas indicadas" <<endl;
         cout << "B: Bajar hasta la altura indicada" << endl << "Q: Aterrizar y desconectar (si el drone no esta activo, salir del programa)" <<endl;
-        cout << "-------------------------------------------------------------------------------" << endl;
+        cout << "NOTA: Tenga en mente que mientras el drone esta esperando a una accion, la bateria se puede agotar" <<endl;
+        cout << "----------------------------------------------------------------------------------------------------" << endl;
 
         double t0 = clock();
         cin >> opcion;

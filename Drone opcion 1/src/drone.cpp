@@ -17,12 +17,14 @@
 
 
 colaLim<Msg> vec(10);
+colaLim<Msg> logs(1);
 torreControl torre;
 RandReal BatAleatorio(0.5, 2.0);
 RandReal BatArranque(0, 1);
 RandReal VelSubida(0.5,2);
 RandReal VelBajada(1,2.5);
 RandReal BatEspera(-1, 1);
+RandReal AltCambio(-0.5, 0.5);
 CoordenadasGPS actuales, destino;
 
 std::ofstream miFichero ("droneinfo.txt");
@@ -40,10 +42,11 @@ void DroneInfo::arrancar()
     miFichero << "Se arrancó el drone en el instante " << inicial <<endl;
     do
     {
-    std::cout << "Introduzca las coordenadas de actuales, latitud (intervalo +-90) y longuitud (intervalo +-180), en grados: " << std::endl;
-    std::cin >> actuales.latitud;
-    std::cin >> actuales.longuitud;
-    }while ( (actuales.latitud > 90) || (actuales.latitud < -90) || (actuales.longuitud < -180) || (actuales.longuitud > 180));
+        std::cout << "Introduzca las coordenadas de actuales, latitud (intervalo +-90) y longuitud (intervalo +-180), en grados: " << std::endl;
+        std::cin >> actuales.latitud;
+        std::cin >> actuales.longuitud;
+    }
+    while ( (actuales.latitud > 90) || (actuales.latitud < -90) || (actuales.longuitud < -180) || (actuales.longuitud > 180));
     std::cout << "Latitud actual: " << actuales.latitud << ", longuitud actual: " << actuales.longuitud <<endl;
 
 
@@ -51,7 +54,8 @@ void DroneInfo::arrancar()
     {
         time(&mTimeStamp);
         mBattery -= BatArranque();
-        vec.push(Msg(mHeight, mBattery, (time_t)mTimeStamp));          //Ha pasado un segundo, tenemos 1% menos de batería
+        vec.push(Msg(mHeight, mBattery, (time_t)mTimeStamp));
+        logs.registro((Msg(mHeight, mBattery, (time_t)mTimeStamp)), 0);
         torre.leerMensaje(vec);
         std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     }
@@ -62,43 +66,52 @@ void DroneInfo::arrancar()
 
 void DroneInfo::subirHasta(double altura, double &t)
 {
-
+    long double inicio = clock();
     if(!miFichero)
     {
         cout << "Error al abrir el fichero" << endl;
         exit (1);
     }
 
-
     mBattery -= t + BatEspera();
 
-    miFichero << "Se ordenó al drone subir hasta la altura " << altura << " en el instante " << t << endl;
-
-    if(altura < 0)
+    if(mBattery <= 0)
     {
-        cout << "ERROR, no se puede ascender a una  altura negativa" <<endl;
+        cout << "La batería se agoto mientras el drone esperaba la orden y aterrizó automaticamente" <<endl;
         return;
     }
-
-    else if (altura < mHeight)
-    {
-        cout << "ERROR, no se puede ascendere hacia abajo" <<endl;
-        return;
-    }
-
     else
     {
-        std::cout << "Ascendiendo a "<< altura << " metros..."<< std::endl;
-        std::cout << "\n" << std::endl;
 
-        while(mHeight<altura)
+        miFichero << "Se ordenó al drone subir hasta la altura " << altura << " en el instante " << inicio << endl;
+
+        if(altura < 0)
         {
-            mHeight += VelSubida();
-            mBattery -= BatAleatorio();
-            time(&mTimeStamp);
-            vec.push(Msg(mHeight, mBattery, (time_t)mTimeStamp));
-            std::this_thread::sleep_for(std::chrono::milliseconds(1000)); //espera un segundo. No hace nada.
-            torre.leerMensaje(vec);
+            cout << "ERROR, no se puede ascender a una  altura negativa" <<endl;
+            return;
+        }
+
+        else if (altura < mHeight)
+        {
+            cout << "ERROR, no se puede ascendere hacia abajo" <<endl;
+            return;
+        }
+
+        else
+        {
+            std::cout << "Ascendiendo a "<< altura << " metros..."<< std::endl;
+            std::cout << "\n" << std::endl;
+
+            while(mHeight<altura)
+            {
+                mHeight += VelSubida();
+                mBattery -= BatAleatorio();
+                time(&mTimeStamp);
+                vec.push(Msg(mHeight, mBattery, (time_t)mTimeStamp));
+                logs.registro((Msg(mHeight, mBattery, (time_t)mTimeStamp)), 0);
+                std::this_thread::sleep_for(std::chrono::milliseconds(1000)); //espera un segundo. No hace nada.
+                torre.leerMensaje(vec);
+            }
         }
     }
 }
@@ -106,6 +119,7 @@ void DroneInfo::subirHasta(double altura, double &t)
 
 void DroneInfo::bajarHasta(double altura, double &t)
 {
+    long double inicio = clock();
 
     if(!miFichero)
     {
@@ -113,39 +127,49 @@ void DroneInfo::bajarHasta(double altura, double &t)
         exit (1);
     }
 
-    miFichero << "Se ordeno al drone bajar hasta la altura "<< altura << " en el instante " << t << endl;
-
     mBattery -= t + BatEspera();
 
-    if(altura < 0)
+    if(mBattery <= 0)
     {
-        cout << "ERROR, la altura no puede ser negativa" <<endl;
+        cout << "La batería se agoto mientras el drone esperaba la orden y aterrizó automaticamente" <<endl;
         return;
     }
-
-    else if(altura > mHeight)
-    {
-        cout << "ERROR, no puedes bajar hacia arriba" <<endl;
-        return;
-    }
-
     else
     {
-        if(altura)
+
+        miFichero << "Se ordeno al drone bajar hasta la altura "<< altura << " en el instante " << inicio << endl;
+
+        if(altura < 0)
+        {
+            cout << "ERROR, la altura no puede ser negativa" <<endl;
+            return;
+        }
+
+        else if(altura > mHeight)
+        {
+            cout << "ERROR, no puedes bajar hacia arriba" <<endl;
+            return;
+        }
+
+        else
+        {
+            if(altura)
             {
-            //para no imprimir "descendiento a 0 metros..." (aterrizaje)
-            std::cout << "Descendiendo a "<< altura << " metros..."<< std::endl;
-            std::cout << "\n" << std::endl;
+                //para no imprimir "descendiento a 0 metros..." (aterrizaje)
+                std::cout << "Descendiendo a "<< altura << " metros..."<< std::endl;
+                std::cout << "\n" << std::endl;
             }
 
-        while(mHeight>altura)
-        {
-            mHeight -= VelBajada();
-            mBattery -= BatAleatorio();
-            time(&mTimeStamp);
-            vec.push(Msg(mHeight, mBattery,(time_t)mTimeStamp));
-            torre.leerMensaje(vec);
-            std::this_thread::sleep_for(std::chrono::milliseconds(1000)); //espera un segundo. No hace nada.
+            while(mHeight>altura)
+            {
+                mHeight -= VelBajada();
+                mBattery -= BatAleatorio();
+                time(&mTimeStamp);
+                vec.push(Msg(mHeight, mBattery,(time_t)mTimeStamp));
+                logs.registro((Msg(mHeight, mBattery,(time_t)mTimeStamp)), 0);
+                torre.leerMensaje(vec);
+                std::this_thread::sleep_for(std::chrono::milliseconds(1000)); //espera un segundo. No hace nada.
+            }
         }
     }
 }
@@ -153,6 +177,7 @@ void DroneInfo::bajarHasta(double altura, double &t)
 
 void DroneInfo::aterrizar(double &t)
 {
+    long double inicio = clock();
 
     if(!miFichero)
     {
@@ -160,23 +185,33 @@ void DroneInfo::aterrizar(double &t)
         exit (1);
     }
 
-    if (t = 0)
+    if (t == 0)
     {
         miFichero << "Se ordenó al drone aterrizar automaticamente porque la batería se estaba agotando " <<endl;
-    }else
+        return;
+    }
+    else
     {
-        miFichero << "Se ordenó al drone aterrizar en el instante " << t <<endl;
+        miFichero << "Se ordenó al drone aterrizar en el instante " << inicio <<endl;
     }
 
 
     mBattery -= t + BatEspera();
-
     double aux = 0;
     std::cout << "Aterrizando..." << std::endl;
     std::cout << "\n" << std::endl;
     std::cout << "Aterrizaje" <<std::endl;
     bajarHasta(0, aux);
     std::cout <<"Completado" << std::endl;
+
+    miFichero << endl;
+    miFichero << "Registro de la actividad: " <<endl;
+    do
+    {
+        Msg temporal(0, 0, 0, 0, (time_t)0);
+        temporal = logs.get();
+        miFichero << temporal <<endl;
+    }while(!logs.empty());
     if (mBattery <= 1)
         exit (EXIT_FAILURE);
 }
@@ -184,6 +219,11 @@ void DroneInfo::aterrizar(double &t)
 
 double DroneInfo::obtenerDistancia(double di)
 {
+    if (mHeight <= 2)
+    {
+        cout << "ATENCION: La altura es demasiado baja para mover el drone, suba hasta una altura mayor" <<endl;
+        return 0;
+    }
     CoordenadasGPS origen, origenRad, destinoRad;
 
     double r = 6370000;
@@ -215,14 +255,12 @@ double DroneInfo::obtenerDistancia(double di)
     double t1 = clock();
     double tiempo_ejecc = ((t1-t0)/CLOCKS_PER_SEC);
 
-
-    std::cout << "Mientras escribias se ha gastado un " << round(tiempo_ejecc) << "% de la bateria" <<std::endl;
-
     mBattery -= round(tiempo_ejecc);
 
     mDistancia = di;
 
     vec.push(Msg(mHeight, mBattery, 0, (time_t)mTimeStamp));
+    logs.registro((Msg(mHeight, mBattery, 0, (time_t)mTimeStamp)), 0);
 
     return(di);
 }
@@ -230,6 +268,7 @@ double DroneInfo::obtenerDistancia(double di)
 
 void DroneInfo::moverHasta(const &d, double &t)
 {
+    long double inicio = clock();
 
     if(!miFichero)
     {
@@ -237,50 +276,51 @@ void DroneInfo::moverHasta(const &d, double &t)
         exit (1);
     }
 
-    miFichero << "Se ordeno al drone desplazarse hasta las coordenadas " << destino.latitud << "º, " << destino.longuitud << "º desde las coordenadas " << actuales.latitud << "º, " << actuales.longuitud << "º en el instante " << t <<endl;
-
     mBattery -= t + BatEspera();
 
-    if (mHeight <= 2)
+    if(mBattery <= 0)
     {
-        cout << "ATENCION: La altura es demasiado baja para mover el drone, suba hasta una altura mayor" <<endl;
+        cout << "La batería se agoto mientras el drone esperaba la orden y aterrizó automaticamente" <<endl;
         return;
     }
-
     else
     {
+
+        miFichero << "Se ordeno al drone desplazarse hasta las coordenadas " << destino.latitud << "º, " << destino.longuitud << "º desde las coordenadas " << actuales.latitud << "º, " << actuales.longuitud << "º en el instante " << inicio <<endl;
+
+
         double recorrido = 0;
         int veloc = 0;
-        srand(time(NULL));
         torre.leerMensaje(vec);
         std::cout << "Coordenadas de origen: Latitud; " << actuales.latitud << ", longuitud; " << actuales.longuitud <<endl;
 
         while(d >= recorrido)
+        {
+            if (mBattery <= mHeight)
             {
-                if (mBattery <= mHeight)
-                {
-                    double aux = 0;
-                    std::cout << "La batería se esta agotando, aterrizando automaticamente" << std::endl;
-                    aterrizar(aux);
-                    std::cout << "Batería agotada " <<endl;
-                    break;
-                }
-
-                double BatCae = BatAleatorio();
-                veloc = 15+rand()%(26-15);
-                recorrido = recorrido +veloc;
-                mBattery -= BatCae;
-                time(&mTimeStamp);
-                vec.push(Msg(mHeight, mBattery, recorrido, veloc, (time_t)mTimeStamp));
-                torre.leerMensaje(vec);
-                std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-
+                double aux = 0;
+                std::cout << "La batería se esta agotando, aterrizando automaticamente" << std::endl;
+                aterrizar(aux);
+                std::cout << "Batería agotada " <<endl;
+                break;
             }
 
-            destino.latitud = actuales.latitud;
-            destino.longuitud = actuales.longuitud;
+            double BatCae = BatAleatorio();
+            veloc = 15+rand()%(26-15);
+            recorrido = recorrido +veloc;
+            mBattery -= BatCae;
+            double altMoment = mHeight + AltCambio();
+            time(&mTimeStamp);
+            vec.push(Msg(altMoment, mBattery, recorrido, veloc, (time_t)mTimeStamp));
+            logs.registro((Msg(altMoment, mBattery, recorrido, veloc, (time_t)mTimeStamp)), 0);
+            torre.leerMensaje(vec);
+            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+
+        }
+
+        destino.latitud = actuales.latitud;
+        destino.longuitud = actuales.longuitud;
+
     }
 
 }
-
-
