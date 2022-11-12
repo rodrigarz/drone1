@@ -1,11 +1,10 @@
 #ifndef DRONE_H
 #define DRONE_H
-#include <fstream>
 
 
 const int TIEMPO_ARRANQUE = 2;  //tiempo en segundos que emplea en arranque
 
-
+//Usamos una estructura para trabajar mas facilmente con las coordenadas
 struct CoordenadasGPS
 {
     double latitud;
@@ -19,10 +18,9 @@ class DroneInfo
     time_t mTimeStamp{0};
     double mDistancia {0};
 public:
-   // friend class torreControl;
     void arrancar();
-    void subirHasta(double h, double &t);     //orden de subir hasta h metros
-    void bajarHasta(double h, double &t);     //orden de bajar hasta h metros
+    void subirHasta(double h, double &t);
+    void bajarHasta(double h, double &t);
     void aterrizar(double &t);
     double obtenerDistancia(double di);
     void moverHasta(const &d, double &t);
