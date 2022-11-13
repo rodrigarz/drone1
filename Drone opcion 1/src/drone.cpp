@@ -1,11 +1,8 @@
 #include <ctime>
-#include <deque>
-#include <stdlib.h>
 #include "drone.h"
 #include "cola.h"
 #include "msg.h"
 #include "torrecontrol.h"
-#include <thread>
 #include <cmath>
 #include <chrono>
 #include <iostream>
@@ -74,7 +71,7 @@ void DroneInfo::arrancar()
 
 void DroneInfo::subirHasta(double altura, double &t)
 {
-    //Usamos la funcion clock para almacenar en un entero largo el instante de tiempo donde se ordeno ejecutar la accion
+    //Usamos la funcion clock para almacenar en un entero largo el instante de tiempo donde se ordeno ejecutar la accion (se hace en todas las funciones de la clase)
     long double inicio = clock();
     if(!miFichero)
     {
@@ -97,7 +94,7 @@ void DroneInfo::subirHasta(double altura, double &t)
         miFichero << "Se ordenó al drone subir hasta la altura " << altura << " en el instante " << inicio << endl;
 
 
-    //Comprobamos que la altura solicitada tiene sentido
+        //Comprobamos que la altura solicitada tiene sentido
         if(altura < 0)
         {
             cout << "ERROR, no se puede ascender a una  altura negativa" <<endl;
@@ -152,8 +149,7 @@ void DroneInfo::bajarHasta(double altura, double &t)
     else
     {
 
-        miFichero << "Se ordeno al drone bajar hasta la altura "<< altura << " en el instante " << inicio << endl;
-
+        //Comprobamos que la altura introducida tiene sentido para bajar
         if(altura < 0)
         {
             cout << "ERROR, la altura no puede ser negativa" <<endl;
@@ -168,6 +164,9 @@ void DroneInfo::bajarHasta(double altura, double &t)
 
         else
         {
+            //Almacenamos en el fichero la informacion con la altura indicada y el tiempo en el que se realizo la orden
+            miFichero << "Se ordeno al drone bajar hasta la altura "<< altura << " en el instante " << inicio << endl;
+
             if(altura)
             {
                 //para no imprimir "descendiento a 0 metros..." (aterrizaje)
@@ -180,11 +179,16 @@ void DroneInfo::bajarHasta(double altura, double &t)
                 mHeight -= VelBajada();
                 mBattery -= BatAleatorio();
                 time(&mTimeStamp);
+
+                // En cada iteración, con el dato ya obtenido, comprobamos que ninguno de los dos sea negativo, ya que con los numeros
+                //aleatorios que utilizmos podria llegar a ocurrir
                 if( (mHeight < 0) || (mBattery < 0))
                     return;
+
                 vec.push(Msg(mHeight, mBattery,(time_t)mTimeStamp));
                 logs.registro((Msg(mHeight, mBattery,(time_t)mTimeStamp)), 0);
                 torre.leerMensaje(vec);
+
                 std::this_thread::sleep_for(std::chrono::milliseconds(1000)); //espera un segundo. No hace nada.
             }
         }
@@ -202,11 +206,14 @@ void DroneInfo::aterrizar(double &t)
         exit (1);
     }
 
+    //Usamos la el parametro t que le pasamos a la funcion como variable auxiliar para el caso en el que la bateria se ha agotado, y el drone tiene que aterrizar de forma autonoma
     if (t == 0)
     {
         miFichero << "Se ordenó al drone aterrizar automaticamente porque la batería se estaba agotando " <<endl;
         return;
     }
+
+    //Si el parametro que le pasamos no es 0, indicamos en el fichero el instante en el que solicito la accion
     else
     {
         miFichero << "Se ordenó al drone aterrizar en el instante " << inicio <<endl;
@@ -215,12 +222,16 @@ void DroneInfo::aterrizar(double &t)
 
     mBattery -= t + BatEspera();
     double aux = 0;
+
     std::cout << "Aterrizando..." << std::endl;
     std::cout << "\n" << std::endl;
-    std::cout << "Aterrizaje" <<std::endl;
+
+    //Para el aterrizaje utilizamos la funcion bajar hasta, indicandole que la altura es 0
     bajarHasta(0, aux);
+
     std::cout <<"Completado" << std::endl;
 
+    //Una vez hemos aterrizado, volcamos en el fichero toda la cola logs, que es de tamaño ilimitado, para poder almacenar toda la informacion del vuelo
     miFichero << endl;
     miFichero << "Registro de la actividad: " <<endl;
     do
@@ -228,47 +239,59 @@ void DroneInfo::aterrizar(double &t)
         Msg temporal(0, 0, 0, 0, (time_t)0);
         temporal = logs.get();
         miFichero << temporal <<endl;
-    }while(!logs.empty());
+    }
+    while(!logs.empty());
+
     if (mBattery <= 1)
         exit (EXIT_FAILURE);
 }
 
 
+//Esta funcion se ejecuta a la par con la funcion moverHasta, ya que est ultima recurre a obtenerDistancia para obtener la distancia que se recorrera
 double DroneInfo::obtenerDistancia(double di)
 {
+    //Por seguridad, impedimos que se pueda mover el drone si la altura es inferor a 2
     if (mHeight <= 2)
     {
         cout << "ATENCION: La altura es demasiado baja para mover el drone, suba hasta una altura mayor" <<endl;
         return 0;
     }
+
+    //Declaramos las estructuras de coordenadas que utilizaremos
     CoordenadasGPS  origenRad, destinoRad;
 
-    double r = 6370000;
     double t0 = clock();
 
 
-    std::cout << "Introduzca coordenadas de destino, latitud y longuitud, en grados: " << std::endl;
-    std::cin >> destino.latitud;
-    std::cin >> destino.longuitud;
+    //Solicitamos al usuario que indique las coordeadas de destino del drone, comprobando que sean reales
+    do
+    {
+        std::cout << "Introduzca las coordenadas de destino, latitud (intervalo +-90) y longuitud (intervalo +-180), en grados: " << std::endl;
+        std::cin >> destino.latitud;
+        std::cin >> destino.longuitud;
+    }
+    while ( (destino.latitud > 90) || (destino.latitud < -90) || (destino.longuitud < -180) || (destino.longuitud > 180));
+    std::cout << "Latitud de destino: " << destino.latitud << ", longuitud de destino: " << destino.longuitud <<endl <<endl;
 
-
+    //Transformamos las coordenadas en grados a radianes para poder utilizar la ecuacion
     origenRad.latitud = actuales.latitud * M_PI/180;
     origenRad.longuitud = actuales.longuitud * M_PI/180;
     destinoRad.latitud = destino.latitud * M_PI/180;
     destinoRad.longuitud = destino.longuitud * M_PI/180;
 
 
-    //Variables auxiliares para simplificar el cálculo
+    //Variables auxiliares para simplificar el cálculo, se utiliza la formula de Haversine
     double a = pow(sin( (destinoRad.latitud - origenRad.latitud)/2),2);
     double b = pow(sin((destinoRad.longuitud - origenRad.longuitud)/2),2);
     double c = (a + cos(origenRad.latitud)*cos(destinoRad.latitud)*b);
 
-    di = 2*r*asin(sqrt (c));
+    //Calculo final para obtener la distancia total
+    di = 2*RADIO*asin(sqrt (c));
 
-
+    //Indicamos por pantalla la distancia que se recorre
     std::cout << "La distancia que recorreremos es de " << di << " metros" <<std::endl;
 
-
+    //Calculamos la bateria que se ha gastado mientras el usuario indicaba la distancia
     double t1 = clock();
     double tiempo_ejecc = ((t1-t0)/CLOCKS_PER_SEC);
 
@@ -303,23 +326,31 @@ void DroneInfo::moverHasta(const &d, double &t)
     else
     {
 
+        //Se guarda en el fichero las coordenadas de origen, las de destino, y el instante en el que se ejcuto la orden
         miFichero << "Se ordeno al drone desplazarse hasta las coordenadas " << destino.latitud << "º, " << destino.longuitud << "º desde las coordenadas " << actuales.latitud << "º, " << actuales.longuitud << "º en el instante " << inicio <<endl;
 
-
+        //Inicializamos las variables que indican la distancia recorrida y la velocidad instantanea
         double recorrido = 0;
         int veloc = 0;
-        torre.leerMensaje(vec);
         std::cout << "Coordenadas de origen: Latitud; " << actuales.latitud << ", longuitud; " << actuales.longuitud <<endl;
 
+
+        /*
+            Mientras la distancia recorrida se menor que la indicada, realizamos las ordenes indicadas a continuacion
+            En cada iteración, al principio, comprobamos que la bateria es suficiente para aterrizar en emergencia, si no se cumple, mandamos aterrizar (la bateria se gasta aproximadamente 1% por cada metro de descenso
+            Si hay bateria suficiente, restamos porcentaje a la bateria, ponemos una velocidad en el rango 26 - 15, aumentamos el recorrido y simulamos pequeños cambios en la altura, para simular turbulencias
+            Almacenamos los datos en ambas colas, mandamos leer la cola vec, y esperamos un segundo para repetir la iteracion
+        */
         while(d >= recorrido)
         {
             if (mBattery <= mHeight)
             {
                 double aux = 0;
                 std::cout << "La batería se esta agotando, aterrizando automaticamente" << std::endl;
+                bajarHasta(0,aux);
                 aterrizar(aux);
                 std::cout << "Batería agotada " <<endl;
-                break;
+                return;
             }
 
             double BatCae = BatAleatorio();
@@ -335,6 +366,7 @@ void DroneInfo::moverHasta(const &d, double &t)
 
         }
 
+        //Cuando llegamos al destino, cambiamos las coordenadas actuales por las de destino, para que si se quiere volver a mover el drone, partamos de estas ultimas
         destino.latitud = actuales.latitud;
         destino.longuitud = actuales.longuitud;
 

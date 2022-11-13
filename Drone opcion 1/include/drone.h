@@ -3,6 +3,7 @@
 
 
 const int TIEMPO_ARRANQUE = 2;  //tiempo en segundos que emplea en arranque
+const int RADIO = 6370000; //radio de la tierra, se utiliza para obtener la distancia a recorrer
 
 //Usamos una estructura para trabajar mas facilmente con las coordenadas
 struct CoordenadasGPS

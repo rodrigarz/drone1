@@ -111,7 +111,7 @@
 	"drone.h"
 	<deque>
 
-1668294996 source:f:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\main.cpp
+1668297556 source:f:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\main.cpp
 	<iostream>
 	<ctime>
 	<thread>
@@ -124,9 +124,9 @@
 	"torrecontrol.h"
 	<fstream>
 
-1668170710 f:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\include\drone.h
+1668334466 f:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\include\drone.h
 
-1668169514 f:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\include\cola.h
+1668340802 f:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\include\cola.h
 	<deque>
 	<ctime>
 	<thread>
@@ -135,27 +135,18 @@
 	"msg.h"
 	"drone.h"
 
-1668111734 f:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\include\msg.h
-	<deque>
-	<ctime>
-	<thread>
-	<cmath>
+1668341522 f:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\include\msg.h
 	<iostream>
 	<fstream>
 
-1667938048 f:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\include\torrecontrol.h
-	<ctime>
+1668341522 f:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\include\torrecontrol.h
 	<deque>
-	<stdlib.h>
 	"drone.h"
 	"cola.h"
 	"msg.h"
-	<thread>
-	<cmath>
-	<chrono>
 	<iostream>
 
-1668111734 source:f:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\src\msg.cpp
+1668297518 source:f:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\src\msg.cpp
 	"msg.h"
 
 1667932272 source:f:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\src\torrecontrol.cpp
@@ -164,21 +155,18 @@
 	"cola.h"
 	"drone.h"
 
-1668295006 source:f:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\src\drone.cpp
+1668341276 source:f:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\src\drone.cpp
 	<ctime>
-	<deque>
-	<stdlib.h>
 	"drone.h"
 	"cola.h"
 	"msg.h"
 	"torrecontrol.h"
-	<thread>
 	<cmath>
 	<chrono>
 	<iostream>
 	"randomgenerator.h"
 
-1668023772 f:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\include\randomgenerator.h
+1668297518 f:\uni\3º\1º cuatrimestre\informática industrial\drone1\drone opcion 1\include\randomgenerator.h
 	<iostream>
 	<ctime>
 	<random>

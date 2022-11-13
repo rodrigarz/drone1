@@ -56,75 +56,77 @@ int main()
         */
         switch(opcion)
         {
-            case 'A':
-                if(estado != 0)
-                {
-                    cout << "Error, el drone ya esta activo" <<endl;
-                    cout << endl;
-                    break;
-                }
-                else{
-                    estado = 1;
-                    miDron.arrancar();
-                    break;
-                }
-            case 'S':
-                if(estado != 0)
-                {
-                    estado = 2;
-                    cout << "Introduzca la altura deseada: ";
-                    cin >> alt;
-                    miDron.subirHasta(alt, tiempo_ejecc);
-                    break;
-                }
-                else
-                {
-                    cout << "ERROR, antes de ejecutar una accion debes arrancar el drone" <<endl;
-                    break;
-                }
-            case 'D':
-                if(estado != 0)
-                {
-                    estado = 3;
-                    miDron.moverHasta(miDron.obtenerDistancia(0), tiempo_ejecc);
-                    break;
-                }
-                else
-                {
-                    cout << "ERROR, antes de ejecutar una accion debes arrancar el drone" <<endl;
-                    break;
-                }
-            case 'B':
-                if(estado != 0)
-                {
-                    estado = 4;
-                    cout << "Introduzca la altura deseada: ";
-                    cin >> alt;
-                    miDron.bajarHasta(alt, tiempo_ejecc);
-                    break;
-                }
-                else
-                {
+        case 'A':
+            if(estado != 0)
+            {
+                cout << "Error, el drone ya esta activo" <<endl;
+                cout << endl;
+                break;
+            }
+            else
+            {
+                estado = 1;
+                miDron.arrancar();
+                break;
+            }
+        case 'S':
+            if(estado != 0)
+            {
+                estado = 2;
+                cout << "Introduzca la altura deseada: ";
+                cin >> alt;
+                miDron.subirHasta(alt, tiempo_ejecc);
+                break;
+            }
+            else
+            {
+                cout << "ERROR, antes de ejecutar una accion debes arrancar el drone" <<endl;
+                break;
+            }
+        case 'D':
+            if(estado != 0)
+            {
+                estado = 3;
+                miDron.moverHasta(miDron.obtenerDistancia(0), tiempo_ejecc);
+                break;
+            }
+            else
+            {
+                cout << "ERROR, antes de ejecutar una accion debes arrancar el drone" <<endl;
+                break;
+            }
+        case 'B':
+            if(estado != 0)
+            {
+                estado = 4;
+                cout << "Introduzca la altura deseada: ";
+                cin >> alt;
+                miDron.bajarHasta(alt, tiempo_ejecc);
+                break;
+            }
+            else
+            {
 
-                    cout << "ERROR, antes de ejecutar una accion debes arrancar el drone" <<endl;
-                    break;
-                }
-            case 'Q':
-                if(estado != 0)
-                {
-                    estado = 5;
-                    miDron.aterrizar(tiempo_ejecc);
-                    break;
-                }
-                else
-                {
-                    cout << "Saliendo del programa..." <<endl;
-                    return 1;
-                }
-            default: //Si la orden introducida no se reconoce, se pide que se vuelva a introducir
-                cout << "ERROR: No se ha reconocido el comando introducido, pruebe de nuevo" <<endl;
+                cout << "ERROR, antes de ejecutar una accion debes arrancar el drone" <<endl;
+                break;
+            }
+        case 'Q':
+            if(estado != 0)
+            {
+                estado = 5;
+                miDron.aterrizar(tiempo_ejecc);
+                break;
+            }
+            else
+            {
+                cout << "Saliendo del programa..." <<endl;
+                return 1;
+            }
+        default: //Si la orden introducida no se reconoce, se pide que se vuelva a introducir
+            cout << "ERROR: No se ha reconocido el comando introducido, pruebe de nuevo" <<endl;
         }
-    }while (opcion != 'Q'); //En el momento en el que la opcion es Q, salimos del bucle y se para el programa
+    }
+    while (opcion != 'Q');  //En el momento en el que la opcion es Q, salimos del bucle y se para el programa
 
     return 0;
 }
